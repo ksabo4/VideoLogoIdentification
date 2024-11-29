@@ -74,7 +74,7 @@ for filename in os.listdir(logos_dir):
         logos_map[filename] = cv2.imread(img_path)
 
 # Load the test image
-img_path = "VideoLogoIdentification/nike3.png"
+img_path = "TestingImages/nike3.png"
 test_image = cv2.imread(img_path)
 
 
