@@ -1,11 +1,14 @@
 import cv2
 import numpy as np
 
-def match_features(descriptors1, descriptors2):
+def match_features(descriptors1, descriptors2, ratio_thresh):
     good_matches = []
-    ratio_thresh = 0.75
+    if descriptors2 is None or descriptors1 is None:
+        return good_matches
 
     for i, desc1 in enumerate(descriptors1):
+        if desc1 is None:
+            continue
         distances = np.linalg.norm(descriptors2 - desc1, axis=1)
         sorted_indices = np.argsort(distances)
 
@@ -21,29 +24,30 @@ def match_features(descriptors1, descriptors2):
     return good_matches
 
 
-#img1 = cv2.imread('nike1.jpg', cv2.IMREAD_GRAYSCALE)
-#img2 = cv2.imread('nike3.png', cv2.IMREAD_GRAYSCALE)
+img1 = cv2.imread('nike1.jpg', cv2.IMREAD_GRAYSCALE)
+img2 = cv2.imread('nike3.png', cv2.IMREAD_GRAYSCALE)
 
-#sift = cv2.SIFT_create()
+def SIFT(img1, img2, ratio_thresh):
+    sift = cv2.SIFT_create()
 
-#keypoints1, descriptors1 = sift.detectAndCompute(img1, None)
-#keypoints2, descriptors2 = sift.detectAndCompute(img2, None)
+    keypoints1, descriptors1 = sift.detectAndCompute(img1, None)
+    keypoints2, descriptors2 = sift.detectAndCompute(img2, None)
 
-#keypoint_img1 = cv2.drawKeypoints(img1, keypoints1, None,
-  #                                flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-#keypoint_img2 = cv2.drawKeypoints(img2, keypoints2, None,
-    #                             flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    keypoint_img1 = cv2.drawKeypoints(img1, keypoints1, None,
+                                      flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    keypoint_img2 = cv2.drawKeypoints(img2, keypoints2, None,
+                                     flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
-#cv2.imshow('Keypoints in Image 1', keypoint_img1)
-#cv2.imshow('Keypoints in Image 2', keypoint_img2)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
+    cv2.imshow('Keypoints in Image 1', keypoint_img1)
+    cv2.imshow('Keypoints in Image 2', keypoint_img2)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
-#good_matches = match_features(descriptors1, descriptors2)
+    good_matches = match_features(descriptors1, descriptors2, ratio_thresh)
 
-#matched_img = cv2.drawMatches(img1, keypoints1, img2, keypoints2, good_matches, None,
-    #                          flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+    matched_img = cv2.drawMatches(img1, keypoints1, img2, keypoints2, good_matches, None,
+                              flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
-#cv2.imshow('Matched Features', matched_img)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
+    cv2.imshow('Matched Features', matched_img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
