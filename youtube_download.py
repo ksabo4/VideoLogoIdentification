@@ -6,6 +6,8 @@ import imageio.v3 as iio
 import os
 import SIFT
 import RANSAC
+from modified_detect import detect
+from update_video import modify_video_with_frames
 
 url = "https://www.youtube.com/watch?v=freRkr00otY"
 
@@ -15,6 +17,8 @@ canny_lower = 5
 canny_upper = 20
 ratio_thresh = 0.9
 video_name = "nikeAd"
+video_file_name = ""
+frame_gap = 4
 
 def create_dir(name):
     current_directory = os.getcwd()
@@ -29,6 +33,7 @@ try:
 
     # Another option is to download the file, but it seems unnecessary here
     stream.download(filename=f"{video.title}.mp4")
+    video_file_name = f"{video.title}.mp4"
 
 except KeyError:
     print("Unable to fetch video information. Please check the video URL or your network connection.")
@@ -41,35 +46,17 @@ buffer.seek(0)
 
 video_frames = []
 
-create_dir("yolov7-logo-detection/data/" + video_name)
+create_dir("yolov7_logo_detection/data/" + video_name)
 # Use imageio to read frames from the buffer
 for frame_index, frame in enumerate(iio.imiter(buffer, plugin="pyav")):
     # Convert frame to OpenCV-compatible format
     frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
-    # Get every 30th frame of the video
-    if frame_index % 30 == 0:
+    # Get every (frame_gap)th frame of the video
+    if frame_index % frame_gap == 0:
         video_frames.append(frame_bgr)
-        cv2.imwrite("yolov7-logo-detection/data/" + video_name + "/frame" + str(frame_index) + ".png", frame_bgr)
-        #edges = cv2.Canny(frame_bgr, 60, 150)
-        #cv2.imshow("cv2_canny.png", edges)
+        cv2.imwrite(video_name + "/frame" + str(frame_index) + ".png", frame_bgr)
 
-        #cv2.imshow(f"Frame {frame_index}", frame_bgr)
+detect(video_name, "runs/detect", "nikeAdTest")
 
-    # Close window on key press
-    #if cv2.waitKey(1) & 0xFF == ord("q"):
-        #break
-
-#cv2.destroyAllWindows()
-"""canny_logos = []
-for logo in logos:
-    logo_temp = cv2.imread(logo, 0)
-    edges = cv2.Canny(logo_temp, canny_lower, canny_upper)
-    canny_logos.append(edges)
-
-for frame in video_frames:
-    canny = cv2.Canny(frame, canny_lower, canny_upper)
-
-    for logo in canny_logos:
-        SIFT.SIFT(canny, logo, ratio_thresh)
-        #RANSAC.RANSAC(logo, canny)"""
+modify_video_with_frames(video_file_name, "runs/detect/nikeAdTest", "nike_done.mp4")
