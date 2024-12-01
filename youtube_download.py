@@ -3,6 +3,7 @@ import numpy as np
 from pytubefix import YouTube
 import io
 import imageio.v3 as iio
+import os
 import SIFT
 import RANSAC
 
@@ -13,6 +14,13 @@ logos = ["Logos/nike1.png"]
 canny_lower = 5
 canny_upper = 20
 ratio_thresh = 0.9
+video_name = "nikeAd"
+
+def create_dir(name):
+    current_directory = os.getcwd()
+    final_directory = os.path.join(current_directory, name)
+    if not os.path.exists(final_directory):
+        os.makedirs(final_directory)
 
 try:
     # Fetch YouTube video
@@ -20,7 +28,7 @@ try:
     stream = video.streams.filter(file_extension="mp4").first()
 
     # Another option is to download the file, but it seems unnecessary here
-    #stream.download(filename=f"{video.title}.mp4")
+    stream.download(filename=f"{video.title}.mp4")
 
 except KeyError:
     print("Unable to fetch video information. Please check the video URL or your network connection.")
@@ -33,6 +41,7 @@ buffer.seek(0)
 
 video_frames = []
 
+create_dir("yolov7-logo-detection/data/" + video_name)
 # Use imageio to read frames from the buffer
 for frame_index, frame in enumerate(iio.imiter(buffer, plugin="pyav")):
     # Convert frame to OpenCV-compatible format
@@ -41,6 +50,7 @@ for frame_index, frame in enumerate(iio.imiter(buffer, plugin="pyav")):
     # Get every 30th frame of the video
     if frame_index % 30 == 0:
         video_frames.append(frame_bgr)
+        cv2.imwrite("yolov7-logo-detection/data/" + video_name + "/frame" + str(frame_index) + ".png", frame_bgr)
         #edges = cv2.Canny(frame_bgr, 60, 150)
         #cv2.imshow("cv2_canny.png", edges)
 
@@ -51,7 +61,7 @@ for frame_index, frame in enumerate(iio.imiter(buffer, plugin="pyav")):
         #break
 
 #cv2.destroyAllWindows()
-canny_logos = []
+"""canny_logos = []
 for logo in logos:
     logo_temp = cv2.imread(logo, 0)
     edges = cv2.Canny(logo_temp, canny_lower, canny_upper)
@@ -62,4 +72,4 @@ for frame in video_frames:
 
     for logo in canny_logos:
         SIFT.SIFT(canny, logo, ratio_thresh)
-        #RANSAC.RANSAC(logo, canny)
+        #RANSAC.RANSAC(logo, canny)"""
