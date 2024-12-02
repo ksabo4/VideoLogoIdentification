@@ -60,7 +60,7 @@ def modify_video_with_frames(video_path, frames_dir, output_video_path, fps=30):
 
 # Example usage
 original_video = "NIKE  - JUST DO IT | Spec ad.mp4"
-augmented_frames_dir = "runs/detect/nikeAdTest2"
+augmented_frames_dir = "runs/detect/nikeAdTest"
 output_video = "nike_done.mp4"
 
 #modify_video_with_frames(original_video, augmented_frames_dir, output_video)
