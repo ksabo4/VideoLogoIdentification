@@ -4,11 +4,10 @@ from pytubefix import YouTube
 import io
 import imageio.v3 as iio
 import os
-import SIFT
-import RANSAC
 from modified_detect import detect
 from update_video import modify_video_with_frames
 
+# python train.py --weights yolov7.pt --data "data/nike.yaml" --workers 4 --batch-size 4 --cfg cfg/training/yolov7.yaml --name yolov7 --epoch 1
 url = "https://www.youtube.com/watch?v=freRkr00otY"
 
 video_name = "nikeAd"
@@ -33,9 +32,9 @@ try:
     video = YouTube(url)
     stream = video.streams.filter(file_extension="mp4").first()
 
-    full_directory = f"{directory}/{video_name}"
+    full_directory = os.path.join(directory, video_name)
     full_directory = create_dir(full_directory)
-    stream.download(filename=f"{full_directory}/original_video.mp4")
+    stream.download(filename=os.path.join(full_directory, "original_video.mp4"))
 
 
 except KeyError:
@@ -49,7 +48,7 @@ buffer.seek(0)
 
 video_frames = []
 
-create_dir(f"{full_directory}/unmodified_frames")
+create_dir(os.path.join(full_directory, "unmodified_frames"))
 # Use imageio to read frames from the buffer
 for frame_index, frame in enumerate(iio.imiter(buffer, plugin="pyav")):
     # Convert frame to OpenCV-compatible format
@@ -58,8 +57,8 @@ for frame_index, frame in enumerate(iio.imiter(buffer, plugin="pyav")):
     # Get every (frame_gap)th frame of the video
     if frame_index % frame_gap == 0:
         video_frames.append(frame_bgr)
-        cv2.imwrite(f"{full_directory}/unmodified_frames/frame{frame_index}.png", frame_bgr)
+        cv2.imwrite(os.path.join(full_directory, "unmodified_frames", f"frame{frame_index}.png"), frame_bgr)
 
-detect(f"{full_directory}/unmodified_frames", full_directory, "modified_frames")
+detect(os.path.join(full_directory, "unmodified_frames"), full_directory, "modified_frames", conf_thres=0.1)
 
-modify_video_with_frames(f"{full_directory}/original_video.mp4", f"{full_directory}/modified_frames", f"{full_directory}/nike_done.mp4")
+modify_video_with_frames(os.path.join(full_directory, "original_video.mp4"), os.path.join(full_directory, "modified_frames"), os.path.join(full_directory, f"{video_name}_done.mp4"))

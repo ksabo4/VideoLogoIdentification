@@ -15,7 +15,7 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 
 def detect(source, project, name, conf_thres=0.25, iou_thres=0.45, view_img=False, save_txt=True, trace=False, exist_ok=True,
-           device='', weights='yolov7_logo_detection/runs/train/yolo_logo_det/weights/best.pt', imgsz=640, augment=True,
+           device='', weights='best.pt', imgsz=640, augment=True,
            agnostic_nms=True, save_conf=True, classes=None):
     save_img = not source.endswith('.txt')  # save inference images
     webcam = source.isnumeric() or source.endswith('.txt') or source.lower().startswith(
@@ -129,6 +129,7 @@ def detect(source, project, name, conf_thres=0.25, iou_thres=0.45, view_img=Fals
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
             else:
                 print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
+                print("No detections")
                 continue
 
             # Print time (inference + NMS)
