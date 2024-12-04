@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>pexels-huy-phan-1383775.jpg</filename>
+	<path>/Users/kyle/PycharmProjects/CS415/VideoLogoIdentification/swoosh_data/train/pexels-huy-phan-1383775.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4096</width>
+		<height>2733</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Nike</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>2461</xmin>
+			<ymin>688</ymin>
+			<xmax>4061</xmax>
+			<ymax>1344</ymax>
+		</bndbox>
+	</object>
+</annotation>

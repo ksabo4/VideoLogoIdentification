@@ -1,0 +1,6 @@
+names:
+- Nike
+nc: 1
+path: .....
+train: swoosh_data/images/train
+val: swoosh_data/images/val

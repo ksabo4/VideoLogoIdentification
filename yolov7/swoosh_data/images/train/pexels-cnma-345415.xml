@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>pexels-cnma-345415.jpg</filename>
+	<path>/Users/kyle/PycharmProjects/CS415/VideoLogoIdentification/swoosh_data/train/pexels-cnma-345415.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>4096</width>
+		<height>2731</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Nike</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1948</xmin>
+			<ymin>406</ymin>
+			<xmax>2392</xmax>
+			<ymax>793</ymax>
+		</bndbox>
+	</object>
+</annotation>

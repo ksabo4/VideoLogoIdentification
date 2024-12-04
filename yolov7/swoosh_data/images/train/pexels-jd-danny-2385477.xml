@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>pexels-jd-danny-2385477.jpg</filename>
+	<path>/Users/kyle/PycharmProjects/CS415/VideoLogoIdentification/swoosh_data/train/pexels-jd-danny-2385477.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2896</width>
+		<height>1936</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Nike</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1761</xmin>
+			<ymin>1052</ymin>
+			<xmax>2320</xmax>
+			<ymax>1388</ymax>
+		</bndbox>
+	</object>
+</annotation>

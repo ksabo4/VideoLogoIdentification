@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>pexels-rovelyn-camato-797637.jpg</filename>
+	<path>/Users/kyle/PycharmProjects/CS415/VideoLogoIdentification/swoosh_data/train/pexels-rovelyn-camato-797637.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>3024</width>
+		<height>4032</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Nike</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1748</xmin>
+			<ymin>2539</ymin>
+			<xmax>2202</xmax>
+			<ymax>3375</ymax>
+		</bndbox>
+	</object>
+</annotation>

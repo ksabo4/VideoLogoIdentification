@@ -1,0 +1,26 @@
+<annotation>
+	<folder>val</folder>
+	<filename>pexels-sunyu-kim-2157460.jpg</filename>
+	<path>/Users/kyle/PycharmProjects/CS415/VideoLogoIdentification/swoosh_data/val/pexels-sunyu-kim-2157460.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2815</width>
+		<height>3753</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Nike</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1248</xmin>
+			<ymin>2563</ymin>
+			<xmax>1473</xmax>
+			<ymax>2688</ymax>
+		</bndbox>
+	</object>
+</annotation>

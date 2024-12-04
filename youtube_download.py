@@ -16,7 +16,7 @@ directory = "runs"
 full_directory = ""
 frame_gap = 30
 
-def create_dir(name, num=0, ):
+def create_dir(name, num=0):
     current_directory = os.getcwd()
     if num > 0:
         final_directory = os.path.join(current_directory, name + str(num))

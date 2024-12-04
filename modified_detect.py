@@ -13,7 +13,6 @@ from utils.general import check_img_size, check_requirements, check_imshow, non_
     scale_coords, xyxy2xywh, strip_optimizer, set_logging, increment_path
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
-#from yolov7_logo_detection.src.yolov7.
 
 def detect(source, project, name, conf_thres=0.25, iou_thres=0.45, view_img=False, save_txt=True, trace=False, exist_ok=True,
            device='', weights='yolov7_logo_detection/runs/train/yolo_logo_det/weights/best.pt', imgsz=640, augment=True,
